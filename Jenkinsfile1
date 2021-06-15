@@ -2,6 +2,21 @@ pipeline{
     agent any
 
     tools{
-        maven 'm3
+        maven 'm3'
+        java "jdk9"
+    }
+}
+stages{
+    stage('Checkout SCM'){
+        agent{
+            docker {
+                image 'node'
+            }
+        }
+        steps{
+        sh 'npm install'
+        sh 'npm build'
+
+        }   
     }
 }
